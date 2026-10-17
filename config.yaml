@@ -1,0 +1,15 @@
+package: latitude
+generate:
+  client: true
+  models: true
+output: client.gen.go
+output-options:
+  resolve-type-name-collisions: true
+  # Scores and other unformatted numbers need float64 precision instead of
+  # oapi-codegen's float32 default.
+  type-mapping:
+    number:
+      default:
+        type: float64
+compatibility:
+  always-prefix-enum-values: true

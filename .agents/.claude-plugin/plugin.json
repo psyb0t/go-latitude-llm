@@ -1,0 +1,18 @@
+{
+  "name": "go-latitude-llm",
+  "description": "Unofficial Go client for the Latitude LLM API: projects, traces, scores, annotations, saved searches, issues, API keys and organization management, generated from the public OpenAPI spec.",
+  "author": {
+    "name": "psyb0t",
+    "url": "https://github.com/psyb0t"
+  },
+  "homepage": "https://github.com/psyb0t/go-latitude-llm",
+  "license": "MIT",
+  "keywords": [
+    "latitude",
+    "llm",
+    "observability",
+    "api-client",
+    "go-library",
+    "openapi"
+  ]
+}
