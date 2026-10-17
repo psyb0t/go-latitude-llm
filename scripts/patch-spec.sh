@@ -3,7 +3,6 @@
 # Nullable type lists become scalar types plus nullable: true. Null enum
 # entries become nullable instead of generating an invalid Go enum value.
 # Numeric exclusive bounds become minimum/maximum plus exclusive flags.
-# Description punctuation is normalized for the generated Go comments.
 # No operations or schema properties are removed.
 set -euo pipefail
 trap 'on_error "$?" "$LINENO"' ERR
@@ -60,12 +59,6 @@ main() {
 	      else . end)
 	    | (if (.exclusiveMaximum | type) == "number" then
 	        .maximum = .exclusiveMaximum | .exclusiveMaximum = true
-	      else . end)
-	    | (if (.description | type) == "string" then
-	        .description |= gsub(" *[\u2014\u2013] *"; ", ")
-	      else . end)
-	    | (if (.summary | type) == "string" then
-	        .summary |= gsub(" *[\u2014\u2013] *"; ", ")
 	      else . end)
 	  else . end)
 	  | .openapi = "3.0.3"

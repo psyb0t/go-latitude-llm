@@ -85,7 +85,7 @@ make generate
 `gen.go` declares the steps, so `make generate` is just `go generate ./...`:
 
 - `scripts/fetch-spec.sh` downloads `https://raw.githubusercontent.com/latitude-dev/latitude-llm/main/apps/api/openapi.json` to `api/openapi.json`.
-- `scripts/patch-spec.sh` writes `api/openapi.patched.json`. It converts OpenAPI 3.1 nullable type arrays into scalar types with `nullable: true`, removes null enum entries while preserving nullability, and converts numeric exclusive bounds to 3.0 bounds and flags. It marks the generator input as OpenAPI 3.0.3 and normalizes description punctuation for Go comments. No operations are removed.
+- `scripts/patch-spec.sh` writes `api/openapi.patched.json`. It converts OpenAPI 3.1 nullable type arrays into scalar types with `nullable: true`, removes null enum entries while preserving nullability, and converts numeric exclusive bounds to 3.0 bounds and flags. It marks the generator input as OpenAPI 3.0.3. No operations are removed.
 - oapi-codegen runs with `config.yaml`, which maps `number` to `float64` instead of the default `float32`.
 
 `.github/workflows/regen.yml` does the same every day in CI. When the spec changes the client, it runs `make lint`, `make test` and `make sec`. If a check fails, Claude can repair the code and repeat the checks up to three times, followed by review. The workflow protects tooling and rule paths from these repairs. A passing change gets a CHANGELOG entry and a release tag when the workflow is installed in a published repository.

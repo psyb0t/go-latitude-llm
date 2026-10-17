@@ -2,6 +2,11 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.1.1, 2026-10-17
+
+- Generated doc comments keep the API's own description text. The spec patch no longer rewrites dashes or wording in descriptions.
+- `make sec` uses Semgrep 1.181.0. Its pinned requirements now hash every published file, so the development image also builds on arm64.
+
 ## v0.1.0, 2026-10-17
 
 - Added `latitude`, a REST client generated with oapi-codegen from the Latitude API specification version 1.0.0 (OpenAPI 3.1.0), published at https://raw.githubusercontent.com/latitude-dev/latitude-llm/main/apps/api/openapi.json. It covers all 48 operations across 35 paths: projects, traces and spans, scores, annotations, saved searches, issues, API keys, OAuth keys, account, members, health and OAuth resource metadata.

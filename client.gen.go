@@ -879,7 +879,7 @@ type AccountOrganization struct {
 	// Name Human-readable organization name.
 	Name string `json:"name"`
 
-	// Slug URL-safe slug. Regenerated when the organization is renamed, don't use it as a stable key.
+	// Slug URL-safe slug. Regenerated when the organization is renamed — don't use it as a stable key.
 	Slug string `json:"slug"`
 }
 
@@ -891,14 +891,14 @@ type AccountResponse struct {
 	// Role Caller's role in the organization. `null` for API-key callers (no real user behind the credential).
 	Role *AccountResponseRole `json:"role"`
 
-	// User The user the request is acting on behalf of. `null` for API-key callers, API keys are org-scoped, not user-scoped.
+	// User The user the request is acting on behalf of. `null` for API-key callers — API keys are org-scoped, not user-scoped.
 	User *AccountUser `json:"user"`
 }
 
 // AccountResponseRole Caller's role in the organization. `null` for API-key callers (no real user behind the credential).
 type AccountResponseRole string
 
-// AccountUser The user the request is acting on behalf of. `null` for API-key callers, API keys are org-scoped, not user-scoped.
+// AccountUser The user the request is acting on behalf of. `null` for API-key callers — API keys are org-scoped, not user-scoped.
 type AccountUser struct {
 	// Email Verified email address of the authenticated user.
 	Email string `json:"email"`
@@ -936,7 +936,7 @@ type ActiveMember struct {
 	// Role Member's role within the organization.
 	Role ActiveMemberRole `json:"role"`
 
-	// Status Discriminator for confirmed members, the user has accepted their invitation and joined the org.
+	// Status Discriminator for confirmed members — the user has accepted their invitation and joined the org.
 	Status ActiveMemberStatus `json:"status"`
 
 	// UserId Identifier of the user the membership represents.
@@ -946,7 +946,7 @@ type ActiveMember struct {
 // ActiveMemberRole Member's role within the organization.
 type ActiveMemberRole string
 
-// ActiveMemberStatus Discriminator for confirmed members, the user has accepted their invitation and joined the org.
+// ActiveMemberStatus Discriminator for confirmed members — the user has accepted their invitation and joined the org.
 type ActiveMemberStatus string
 
 // Annotation defines model for Annotation.
@@ -1100,7 +1100,7 @@ type ApiKey struct {
 	// OrganizationId Organization that owns this API key.
 	OrganizationId string `json:"organizationId"`
 
-	// Token The full API key token. Returned by create / get / update, store it securely; treat it as a password.
+	// Token The full API key token. Returned by create / get / update — store it securely; treat it as a password.
 	Token string `json:"token"`
 
 	// UpdatedAt ISO-8601 timestamp of the last metadata update (rename, revoke, last-used touch).
@@ -1539,10 +1539,10 @@ type ExportIssuesResponseStatus string
 
 // ExportTracesBody defines model for ExportTracesBody.
 type ExportTracesBody struct {
-	// Recipient Email address the export download link is sent to. Must belong to a member of the requesting organization, otherwise the request is rejected with 400.
+	// Recipient Email address the export download link is sent to. Must belong to a member of the requesting organization — otherwise the request is rejected with 400.
 	Recipient openapi_types.Email `json:"recipient"`
 
-	// Traces Which traces to include in the export, either explicit ids or a filter set.
+	// Traces Which traces to include in the export — either explicit ids or a filter set.
 	Traces TracesRef `json:"traces"`
 }
 
@@ -1604,10 +1604,10 @@ type GenAIMessage map[string]interface{}
 // GenAISpanMessage Message in OpenTelemetry GenAI format (`role` + content parts + optional tool calls).
 type GenAISpanMessage map[string]interface{}
 
-// GenAISpanSystem System instructions in OpenTelemetry GenAI format, an array of part objects.
+// GenAISpanSystem System instructions in OpenTelemetry GenAI format — an array of part objects.
 type GenAISpanSystem = []map[string]interface{}
 
-// GenAISystem System instructions in OpenTelemetry GenAI format, an array of part objects.
+// GenAISystem System instructions in OpenTelemetry GenAI format — an array of part objects.
 type GenAISystem = []map[string]interface{}
 
 // HealthResponse defines model for HealthResponse.
@@ -1657,7 +1657,7 @@ type InvitedMember struct {
 	// Id Stable invitation identifier. Distinct from membership ids.
 	Id string `json:"id"`
 
-	// Image Always `null`, no user record exists yet.
+	// Image Always `null` — no user record exists yet.
 	Image any `json:"image"`
 
 	// InvitedAt ISO-8601 timestamp at which the invitation was created.
@@ -1666,7 +1666,7 @@ type InvitedMember struct {
 	// InviterId User id of the member who issued the invitation.
 	InviterId string `json:"inviterId"`
 
-	// Name Always `null`, no user record exists yet.
+	// Name Always `null` — no user record exists yet.
 	Name any `json:"name"`
 
 	// OrganizationId Organization the invitation grants access to.
@@ -1675,17 +1675,17 @@ type InvitedMember struct {
 	// Role Role the invitee will get once they accept. `null` means the default (`member`).
 	Role *InvitedMemberRole `json:"role"`
 
-	// Status Discriminator for pending invitations, the invitee hasn't accepted yet, so no user record exists.
+	// Status Discriminator for pending invitations — the invitee hasn't accepted yet, so no user record exists.
 	Status InvitedMemberStatus `json:"status"`
 
-	// UserId Always `null`, no user record exists until the invitation is accepted.
+	// UserId Always `null` — no user record exists until the invitation is accepted.
 	UserId any `json:"userId"`
 }
 
 // InvitedMemberRole Role the invitee will get once they accept. `null` means the default (`member`).
 type InvitedMemberRole string
 
-// InvitedMemberStatus Discriminator for pending invitations, the invitee hasn't accepted yet, so no user record exists.
+// InvitedMemberStatus Discriminator for pending invitations — the invitee hasn't accepted yet, so no user record exists.
 type InvitedMemberStatus string
 
 // Issue defines model for Issue.
@@ -1903,7 +1903,7 @@ type IssueTrendBucket struct {
 
 // IssuesLifecycleBody defines model for IssuesLifecycleBody.
 type IssuesLifecycleBody struct {
-	// IssueIds Non-empty list of issue ids. Operations are idempotent, already-applied issues are unchanged.
+	// IssueIds Non-empty list of issue ids. Operations are idempotent — already-applied issues are unchanged.
 	IssueIds []string `json:"issueIds"`
 }
 
@@ -2116,7 +2116,7 @@ type ProjectSettings struct {
 
 // ResolveIssuesBody defines model for ResolveIssuesBody.
 type ResolveIssuesBody struct {
-	// IssueIds Non-empty list of issue ids. Operations are idempotent, already-applied issues are unchanged.
+	// IssueIds Non-empty list of issue ids. Operations are idempotent — already-applied issues are unchanged.
 	IssueIds []string `json:"issueIds"`
 
 	// KeepMonitoring When `true`, monitoring continues after the issues are resolved. When `false`, monitoring stops. Defaults to the project setting.
@@ -2419,7 +2419,7 @@ type SpanDetail struct {
 	// StatusMessage OpenTelemetry status message. Empty when not set.
 	StatusMessage string `json:"statusMessage"`
 
-	// SystemInstructions System instructions in OpenTelemetry GenAI format, an array of part objects.
+	// SystemInstructions System instructions in OpenTelemetry GenAI format — an array of part objects.
 	SystemInstructions GenAISpanSystem `json:"systemInstructions"`
 
 	// Tags Free-form tags attached at ingest time.
@@ -2581,7 +2581,7 @@ type Trace struct {
 
 // TraceDetail defines model for TraceDetail.
 type TraceDetail struct {
-	// AllMessages Full conversation view for the trace's final turn, the last span's input messages followed by its output messages, in OpenTelemetry GenAI format.
+	// AllMessages Full conversation view for the trace's final turn — the last span's input messages followed by its output messages, in OpenTelemetry GenAI format.
 	AllMessages []GenAIMessage `json:"allMessages"`
 
 	// CostInputMicrocents Cost of input tokens in microcents (1/1,000,000 USD).
@@ -2650,7 +2650,7 @@ type TraceDetail struct {
 	// StartTime ISO-8601 timestamp of the trace's earliest span.
 	StartTime string `json:"startTime"`
 
-	// SystemInstructions System instructions in OpenTelemetry GenAI format, an array of part objects.
+	// SystemInstructions System instructions in OpenTelemetry GenAI format — an array of part objects.
 	SystemInstructions GenAISystem `json:"systemInstructions"`
 
 	// Tags Free-form tags attached at ingest time.
@@ -2719,7 +2719,7 @@ type TraceSpans struct {
 	Items []Span `json:"items"`
 }
 
-// TracesRef Which traces to include in the export, either explicit ids or a filter set.
+// TracesRef Which traces to include in the export — either explicit ids or a filter set.
 type TracesRef struct {
 	union json.RawMessage
 }
@@ -2756,11 +2756,11 @@ type UpdateApiKeyBody struct {
 
 // UpdateMemberRoleBody defines model for UpdateMemberRoleBody.
 type UpdateMemberRoleBody struct {
-	// Role New role. Owners cannot be changed via this endpoint, owner-transfer happens on the web.
+	// Role New role. Owners cannot be changed via this endpoint — owner-transfer happens on the web.
 	Role UpdateMemberRoleBodyRole `json:"role"`
 }
 
-// UpdateMemberRoleBodyRole New role. Owners cannot be changed via this endpoint, owner-transfer happens on the web.
+// UpdateMemberRoleBodyRole New role. Owners cannot be changed via this endpoint — owner-transfer happens on the web.
 type UpdateMemberRoleBodyRole string
 
 // UpdateProjectBody defines model for UpdateProjectBody.
@@ -3747,7 +3747,7 @@ type ClientInterface interface {
 
 	// CreateApiKeyWithBody Generate API key
 	//
-	// Generates a new API key for the organization. The token is only returned once, store it securely.
+	// Generates a new API key for the organization. The token is only returned once — store it securely.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -3756,7 +3756,7 @@ type ClientInterface interface {
 
 	// CreateApiKey Generate API key
 	//
-	// Generates a new API key for the organization. The token is only returned once, store it securely.
+	// Generates a new API key for the organization. The token is only returned once — store it securely.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -3779,7 +3779,7 @@ type ClientInterface interface {
 
 	// UpdateApiKeyWithBody Update API key
 	//
-	// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+	// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -3788,7 +3788,7 @@ type ClientInterface interface {
 
 	// UpdateApiKey Update API key
 	//
-	// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+	// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -3822,7 +3822,7 @@ type ClientInterface interface {
 
 	// RemoveMember Remove a member
 	//
-	// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected, transfer ownership first. Requires OAuth authentication.
+	// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected — transfer ownership first. Requires OAuth authentication.
 	//
 	// Corresponds with DELETE /v1/members/{memberId} (the `RemoveMember` operationId).
 	RemoveMember(ctx context.Context, memberId string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -3914,7 +3914,7 @@ type ClientInterface interface {
 
 	// UpdateProjectWithBody Update project
 	//
-	// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -3923,7 +3923,7 @@ type ClientInterface interface {
 
 	// UpdateProject Update project
 	//
-	// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -4075,7 +4075,7 @@ type ClientInterface interface {
 
 	// UnmonitorIssue Unmonitor issue
 	//
-	// Stops monitoring the issue. Idempotent, issues that aren't being monitored return 204 without changing anything.
+	// Stops monitoring the issue. Idempotent — issues that aren't being monitored return 204 without changing anything.
 	//
 	// Corresponds with POST /v1/projects/{projectSlug}/issues/{issueSlug}/unmonitor (the `UnmonitorIssue` operationId).
 	UnmonitorIssue(ctx context.Context, projectSlug string, issueSlug string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -4107,7 +4107,7 @@ type ClientInterface interface {
 
 	// CreateSavedSearchWithBody Create saved search
 	//
-	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -4116,7 +4116,7 @@ type ClientInterface interface {
 
 	// CreateSavedSearch Create saved search
 	//
-	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -4139,7 +4139,7 @@ type ClientInterface interface {
 
 	// UpdateSavedSearchWithBody Update saved search
 	//
-	// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -4148,7 +4148,7 @@ type ClientInterface interface {
 
 	// UpdateSavedSearch Update saved search
 	//
-	// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -4157,7 +4157,7 @@ type ClientInterface interface {
 
 	// AssignSavedSearchWithBody Assign saved search
 	//
-	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -4166,7 +4166,7 @@ type ClientInterface interface {
 
 	// AssignSavedSearch Assign saved search
 	//
-	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -4175,7 +4175,7 @@ type ClientInterface interface {
 
 	// ListSavedSearchTraces List traces matching a saved search
 	//
-	// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces`, use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
+	// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces` — use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
 	//
 	// Corresponds with GET /v1/projects/{projectSlug}/searches/{searchSlug}/traces (the `ListSavedSearchTraces` operationId).
 	ListSavedSearchTraces(ctx context.Context, projectSlug string, searchSlug string, params *ListSavedSearchTracesParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -4200,7 +4200,7 @@ type ClientInterface interface {
 
 	// ListTracesWithBody List project traces
 	//
-	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 	//
 	// Takes any type of body and a specified content type.
 	//
@@ -4209,7 +4209,7 @@ type ClientInterface interface {
 
 	// ListTraces List project traces
 	//
-	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 	//
 	// Takes a body of the `application/json` content type.
 	//
@@ -4320,7 +4320,7 @@ func (c *Client) ListApiKeys(ctx context.Context, reqEditors ...RequestEditorFn)
 
 // CreateApiKeyWithBody Generate API key
 //
-// Generates a new API key for the organization. The token is only returned once, store it securely.
+// Generates a new API key for the organization. The token is only returned once — store it securely.
 //
 // Takes any type of body and a specified content type.
 //
@@ -4339,7 +4339,7 @@ func (c *Client) CreateApiKeyWithBody(ctx context.Context, contentType string, b
 
 // CreateApiKey Generate API key
 //
-// Generates a new API key for the organization. The token is only returned once, store it securely.
+// Generates a new API key for the organization. The token is only returned once — store it securely.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -4392,7 +4392,7 @@ func (c *Client) GetApiKey(ctx context.Context, apiKeyId string, reqEditors ...R
 
 // UpdateApiKeyWithBody Update API key
 //
-// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 //
 // Takes any type of body and a specified content type.
 //
@@ -4411,7 +4411,7 @@ func (c *Client) UpdateApiKeyWithBody(ctx context.Context, apiKeyId string, cont
 
 // UpdateApiKey Update API key
 //
-// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -4485,7 +4485,7 @@ func (c *Client) InviteMember(ctx context.Context, body InviteMemberJSONRequestB
 
 // RemoveMember Remove a member
 //
-// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected, transfer ownership first. Requires OAuth authentication.
+// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected — transfer ownership first. Requires OAuth authentication.
 //
 // Corresponds with DELETE /v1/members/{memberId} (the `RemoveMember` operationId).
 func (c *Client) RemoveMember(ctx context.Context, memberId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -4697,7 +4697,7 @@ func (c *Client) GetProject(ctx context.Context, projectSlug string, reqEditors 
 
 // UpdateProjectWithBody Update project
 //
-// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes any type of body and a specified content type.
 //
@@ -4716,7 +4716,7 @@ func (c *Client) UpdateProjectWithBody(ctx context.Context, projectSlug string, 
 
 // UpdateProject Update project
 //
-// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -5048,7 +5048,7 @@ func (c *Client) GetIssueTrend(ctx context.Context, projectSlug string, issueSlu
 
 // UnmonitorIssue Unmonitor issue
 //
-// Stops monitoring the issue. Idempotent, issues that aren't being monitored return 204 without changing anything.
+// Stops monitoring the issue. Idempotent — issues that aren't being monitored return 204 without changing anything.
 //
 // Corresponds with POST /v1/projects/{projectSlug}/issues/{issueSlug}/unmonitor (the `UnmonitorIssue` operationId).
 func (c *Client) UnmonitorIssue(ctx context.Context, projectSlug string, issueSlug string, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -5120,7 +5120,7 @@ func (c *Client) ListSavedSearches(ctx context.Context, projectSlug string, reqE
 
 // CreateSavedSearchWithBody Create saved search
 //
-// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 //
 // Takes any type of body and a specified content type.
 //
@@ -5139,7 +5139,7 @@ func (c *Client) CreateSavedSearchWithBody(ctx context.Context, projectSlug stri
 
 // CreateSavedSearch Create saved search
 //
-// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -5192,7 +5192,7 @@ func (c *Client) GetSavedSearch(ctx context.Context, projectSlug string, searchS
 
 // UpdateSavedSearchWithBody Update saved search
 //
-// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes any type of body and a specified content type.
 //
@@ -5211,7 +5211,7 @@ func (c *Client) UpdateSavedSearchWithBody(ctx context.Context, projectSlug stri
 
 // UpdateSavedSearch Update saved search
 //
-// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -5230,7 +5230,7 @@ func (c *Client) UpdateSavedSearch(ctx context.Context, projectSlug string, sear
 
 // AssignSavedSearchWithBody Assign saved search
 //
-// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 //
 // Takes any type of body and a specified content type.
 //
@@ -5249,7 +5249,7 @@ func (c *Client) AssignSavedSearchWithBody(ctx context.Context, projectSlug stri
 
 // AssignSavedSearch Assign saved search
 //
-// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -5268,7 +5268,7 @@ func (c *Client) AssignSavedSearch(ctx context.Context, projectSlug string, sear
 
 // ListSavedSearchTraces List traces matching a saved search
 //
-// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces`, use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
+// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces` — use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
 //
 // Corresponds with GET /v1/projects/{projectSlug}/searches/{searchSlug}/traces (the `ListSavedSearchTraces` operationId).
 func (c *Client) ListSavedSearchTraces(ctx context.Context, projectSlug string, searchSlug string, params *ListSavedSearchTracesParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -5323,7 +5323,7 @@ func (c *Client) ExportTraces(ctx context.Context, projectSlug string, body Expo
 
 // ListTracesWithBody List project traces
 //
-// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 //
 // Takes any type of body and a specified content type.
 //
@@ -5342,7 +5342,7 @@ func (c *Client) ListTracesWithBody(ctx context.Context, projectSlug string, con
 
 // ListTraces List project traces
 //
-// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 //
 // Takes a body of the `application/json` content type.
 //
@@ -7730,7 +7730,7 @@ type ClientWithResponsesInterface interface {
 
 	// CreateApiKeyWithBodyWithResponse Generate API key
 	//
-	// Generates a new API key for the organization. The token is only returned once, store it securely.
+	// Generates a new API key for the organization. The token is only returned once — store it securely.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -7739,7 +7739,7 @@ type ClientWithResponsesInterface interface {
 
 	// CreateApiKeyWithResponse Generate API key
 	//
-	// Generates a new API key for the organization. The token is only returned once, store it securely.
+	// Generates a new API key for the organization. The token is only returned once — store it securely.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -7766,7 +7766,7 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateApiKeyWithBodyWithResponse Update API key
 	//
-	// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+	// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -7775,7 +7775,7 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateApiKeyWithResponse Update API key
 	//
-	// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+	// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -7811,7 +7811,7 @@ type ClientWithResponsesInterface interface {
 
 	// RemoveMemberWithResponse Remove a member
 	//
-	// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected, transfer ownership first. Requires OAuth authentication.
+	// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected — transfer ownership first. Requires OAuth authentication.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -7919,7 +7919,7 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateProjectWithBodyWithResponse Update project
 	//
-	// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -7928,7 +7928,7 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateProjectWithResponse Update project
 	//
-	// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8090,7 +8090,7 @@ type ClientWithResponsesInterface interface {
 
 	// UnmonitorIssueWithResponse Unmonitor issue
 	//
-	// Stops monitoring the issue. Idempotent, issues that aren't being monitored return 204 without changing anything.
+	// Stops monitoring the issue. Idempotent — issues that aren't being monitored return 204 without changing anything.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -8126,7 +8126,7 @@ type ClientWithResponsesInterface interface {
 
 	// CreateSavedSearchWithBodyWithResponse Create saved search
 	//
-	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8135,7 +8135,7 @@ type ClientWithResponsesInterface interface {
 
 	// CreateSavedSearchWithResponse Create saved search
 	//
-	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+	// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8162,7 +8162,7 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateSavedSearchWithBodyWithResponse Update saved search
 	//
-	// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8171,7 +8171,7 @@ type ClientWithResponsesInterface interface {
 
 	// UpdateSavedSearchWithResponse Update saved search
 	//
-	// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+	// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8180,7 +8180,7 @@ type ClientWithResponsesInterface interface {
 
 	// AssignSavedSearchWithBodyWithResponse Assign saved search
 	//
-	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8189,7 +8189,7 @@ type ClientWithResponsesInterface interface {
 
 	// AssignSavedSearchWithResponse Assign saved search
 	//
-	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+	// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8198,7 +8198,7 @@ type ClientWithResponsesInterface interface {
 
 	// ListSavedSearchTracesWithResponse List traces matching a saved search
 	//
-	// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces`, use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
+	// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces` — use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
 	//
 	// Returns a wrapper object for the known response body format(s).
 	//
@@ -8225,7 +8225,7 @@ type ClientWithResponsesInterface interface {
 
 	// ListTracesWithBodyWithResponse List project traces
 	//
-	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 	//
 	// Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -8234,7 +8234,7 @@ type ClientWithResponsesInterface interface {
 
 	// ListTracesWithResponse List project traces
 	//
-	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+	// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 	//
 	// Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 	//
@@ -11148,7 +11148,7 @@ func (c *ClientWithResponses) ListApiKeysWithResponse(ctx context.Context, reqEd
 
 // CreateApiKeyWithBodyWithResponse Generate API key
 //
-// Generates a new API key for the organization. The token is only returned once, store it securely.
+// Generates a new API key for the organization. The token is only returned once — store it securely.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11163,7 +11163,7 @@ func (c *ClientWithResponses) CreateApiKeyWithBodyWithResponse(ctx context.Conte
 
 // CreateApiKeyWithResponse Generate API key
 //
-// Generates a new API key for the organization. The token is only returned once, store it securely.
+// Generates a new API key for the organization. The token is only returned once — store it securely.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11208,7 +11208,7 @@ func (c *ClientWithResponses) GetApiKeyWithResponse(ctx context.Context, apiKeyI
 
 // UpdateApiKeyWithBodyWithResponse Update API key
 //
-// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11223,7 +11223,7 @@ func (c *ClientWithResponses) UpdateApiKeyWithBodyWithResponse(ctx context.Conte
 
 // UpdateApiKeyWithResponse Update API key
 //
-// Renames an API key. The token itself is immutable, use create + revoke if you need a new value.
+// Renames an API key. The token itself is immutable — use create + revoke if you need a new value.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11283,7 +11283,7 @@ func (c *ClientWithResponses) InviteMemberWithResponse(ctx context.Context, body
 
 // RemoveMemberWithResponse Remove a member
 //
-// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected, transfer ownership first. Requires OAuth authentication.
+// Removes a member from the caller's organization. Self-removal and removing the organization owner are rejected — transfer ownership first. Requires OAuth authentication.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -11463,7 +11463,7 @@ func (c *ClientWithResponses) GetProjectWithResponse(ctx context.Context, projec
 
 // UpdateProjectWithBodyWithResponse Update project
 //
-// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11478,7 +11478,7 @@ func (c *ClientWithResponses) UpdateProjectWithBodyWithResponse(ctx context.Cont
 
 // UpdateProjectWithResponse Update project
 //
-// Updates a project's name and/or settings. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a project's name and/or settings. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11748,7 +11748,7 @@ func (c *ClientWithResponses) GetIssueTrendWithResponse(ctx context.Context, pro
 
 // UnmonitorIssueWithResponse Unmonitor issue
 //
-// Stops monitoring the issue. Idempotent, issues that aren't being monitored return 204 without changing anything.
+// Stops monitoring the issue. Idempotent — issues that aren't being monitored return 204 without changing anything.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -11808,7 +11808,7 @@ func (c *ClientWithResponses) ListSavedSearchesWithResponse(ctx context.Context,
 
 // CreateSavedSearchWithBodyWithResponse Create saved search
 //
-// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11823,7 +11823,7 @@ func (c *ClientWithResponses) CreateSavedSearchWithBodyWithResponse(ctx context.
 
 // CreateSavedSearchWithResponse Create saved search
 //
-// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only, the authenticated user becomes the search's `createdByUserId`.
+// Creates a saved search within the project. At least one of `query` or `filters` must be set. The slug is derived from `name`. OAuth-authenticated only — the authenticated user becomes the search's `createdByUserId`.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11868,7 +11868,7 @@ func (c *ClientWithResponses) GetSavedSearchWithResponse(ctx context.Context, pr
 
 // UpdateSavedSearchWithBodyWithResponse Update saved search
 //
-// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11883,7 +11883,7 @@ func (c *ClientWithResponses) UpdateSavedSearchWithBodyWithResponse(ctx context.
 
 // UpdateSavedSearchWithResponse Update saved search
 //
-// Updates a saved search. Renaming may regenerate the slug, clients should re-read the response or rely on the `id` for stable references.
+// Updates a saved search. Renaming may regenerate the slug — clients should re-read the response or rely on the `id` for stable references.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11898,7 +11898,7 @@ func (c *ClientWithResponses) UpdateSavedSearchWithResponse(ctx context.Context,
 
 // AssignSavedSearchWithBodyWithResponse Assign saved search
 //
-// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11913,7 +11913,7 @@ func (c *ClientWithResponses) AssignSavedSearchWithBodyWithResponse(ctx context.
 
 // AssignSavedSearchWithResponse Assign saved search
 //
-// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization, otherwise the request is rejected with 400.
+// Assigns the saved search to a user, or clears the current assignment when `userId` is `null`. The assignee must be a member of the requesting organization — otherwise the request is rejected with 400.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11928,7 +11928,7 @@ func (c *ClientWithResponses) AssignSavedSearchWithResponse(ctx context.Context,
 
 // ListSavedSearchTracesWithResponse List traces matching a saved search
 //
-// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces`, use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
+// Returns a cursor-paginated page of traces that match the saved search's `query` + `filters`. Each row uses the same `Trace` shape as `listTraces` — use the trace point-lookup endpoints (`getTrace`, `listTraceSpans`, `getTraceSpan`, `listTraceAnnotations`) to drill into individual traces.
 //
 // Returns a wrapper object for the known response body format(s).
 //
@@ -11973,7 +11973,7 @@ func (c *ClientWithResponses) ExportTracesWithResponse(ctx context.Context, proj
 
 // ListTracesWithBodyWithResponse List project traces
 //
-// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 //
 // Takes any type of body and a specified content type, and returns a wrapper object for the known response body format(s).
 //
@@ -11988,7 +11988,7 @@ func (c *ClientWithResponses) ListTracesWithBodyWithResponse(ctx context.Context
 
 // ListTracesWithResponse List project traces
 //
-// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content, use `getTrace` for the full conversation view.
+// Returns a cursor-paginated page of traces in the project. Combine `filters` with `query` (free-text semantic search) to narrow the result set. Trace list rows exclude per-message LLM content — use `getTrace` for the full conversation view.
 //
 // Takes a body of the `application/json` content type, and returns a wrapper object for the known response body format(s).
 //
