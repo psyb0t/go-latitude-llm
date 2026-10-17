@@ -44,7 +44,7 @@ make sec       # gitleaks, govulncheck, semgrep
 - Creating saved searches and inviting, updating or removing members require user OAuth tokens according to the operation descriptions, despite their `ApiKeyAuth` security declarations. Token acquisition is outside the generated client.
 - API-key account responses have null `user` and `role`. Nullable schemas become pointers; check before dereferencing.
 - Method names come from operation IDs. Success can be `JSON200` or `JSON201`. HTTP errors are parsed responses, not Go errors; inspect the status and error body.
-- Project listing currently returns all projects in one page. Other collections expose cursors. Do not invent a cursor parameter on `ListProjects`.
+- The spec says project listing returns all projects in one page. Other collections expose cursors. Do not invent a cursor parameter on `ListProjects`.
 - `make generate` downloads the current upstream spec. Review changes after every regeneration. Never edit `client.gen.go` by hand.
 - Security scans always scan the worktree. The history scan runs only when Git metadata exists, so a source archive or new directory is usable without initializing Git.
 - `.github/workflows/regen.yml` runs daily, checks regenerated code, and can tag releases when installed in a published repository. Its `fix_protected_paths` prevents automated repairs to workflows, Makefile, rules, scanner configs and the lint, security and download scripts. A failure needing those paths requires a manual fix.

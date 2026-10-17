@@ -44,7 +44,7 @@ All names below have a `WithResponse` suffix on the parsed-response client.
 | Account and members | `GetAccount`, `ListMembers`, `InviteMember`, `GetMember`, `UpdateMember`, `RemoveMember` |
 | Public metadata | `HealthGet`, `WellKnownOauthProtectedResource` |
 
-Request bodies include `CreateProjectBody`, `UpdateProjectBody`, `ListTracesBody`, `CreateScoreBody`, `CreateAnnotationBody` and `CreateSavedSearchBody`. Score and filter unions use generated accessors. Check the method signature in `client.gen.go` for the exact params and body type.
+Request bodies include `CreateProjectBody`, `UpdateProjectBody`, `ListTracesBody`, `CreateScoreBody`, `CreateAnnotationBody` and `CreateSavedSearchBody`. Score and filter unions use generated accessors. Check the method signature with `go doc github.com/psyb0t/go-latitude-llm ClientWithResponsesInterface` for the exact params and body type.
 
 ## Responses
 
@@ -58,7 +58,7 @@ Only transport or decoding failures return Go errors. Check HTTP status even whe
 
 ## Pagination
 
-Project listing currently returns every project in one page, with nil `NextCursor` and false `HasMore`; `ListProjects` takes no cursor params. Other paginated collections expose `Items`, `HasMore` and `NextCursor`. Pass the opaque cursor back using the operation's generated params or request body, and stop when `HasMore` is false. The client does not fetch subsequent pages automatically.
+The spec says project listing returns every project in one page, with nil `NextCursor` and false `HasMore`; `ListProjects` takes no cursor params. Other paginated collections expose `Items`, `HasMore` and `NextCursor`. Pass the opaque cursor back using the operation's generated params or request body, and stop when `HasMore` is false. The client does not fetch subsequent pages automatically.
 
 ## Pitfalls
 

@@ -1,6 +1,6 @@
 {
   "name": "go-latitude-llm",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Unofficial Go client for the Latitude LLM API: projects, traces, scores, annotations, saved searches, issues, API keys and organization management, generated from the public OpenAPI spec.",
   "author": {
     "name": "psyb0t",

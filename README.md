@@ -62,9 +62,11 @@ func main() {
 
 The same code is in `example_test.go`, so `make test` checks that it compiles. It needs a real key to run. Tests use local HTTP servers and never call Latitude.
 
+The full API, with the spec's descriptions as doc comments, is in the [Go reference](https://pkg.go.dev/github.com/psyb0t/go-latitude-llm) and in `go doc github.com/psyb0t/go-latitude-llm`.
+
 Check `StatusCode()` and the relevant JSON field before using a response. A non-success HTTP status does not by itself produce a Go error. Transport and JSON decoding failures do. Nullable fields are pointers; API-key account responses have null `User` and `Role`.
 
-Method names come from operation IDs, such as `ListProjectsWithResponse`, `CreateProjectWithResponse`, `ListTracesWithResponse` and `GetAccountWithResponse`. The project list currently fits in one page and takes no cursor parameter. Other paginated collections expose `HasMore` and `NextCursor`; pass the returned cursor using that operation's params or body until `HasMore` is false.
+Method names come from operation IDs, such as `ListProjectsWithResponse`, `CreateProjectWithResponse`, `ListTracesWithResponse` and `GetAccountWithResponse`. The spec says the project list fits in one page, and `ListProjects` takes no cursor parameter. Other paginated collections expose `HasMore` and `NextCursor`; pass the returned cursor using that operation's params or body until `HasMore` is false.
 
 ## Auth
 

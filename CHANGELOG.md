@@ -2,6 +2,12 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.1.2, 2026-10-17
+
+- Documentation only. The agent skill explains how to look up every endpoint, parameter and model with `go doc` or on pkg.go.dev, and declares its license.
+- The README points to the full API reference, and the examples in the README and the skill were checked against the current code.
+- The skill's `homepage` and `permissions` sit at the top level of the frontmatter, where agents read them, and the skill is user-invocable.
+
 ## v0.1.1, 2026-10-17
 
 - Generated doc comments keep the API's own description text. The spec patch no longer rewrites dashes or wording in descriptions.
