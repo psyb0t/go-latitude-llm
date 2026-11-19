@@ -2,6 +2,12 @@
 
 All notable changes per release. Versions follow [semver](https://semver.org).
 
+## v0.1.6, 2026-11-19
+
+- Raised the minimum Go version in `go.mod` from 1.26.10 to 1.26.11, which fixes the `net/http` vulnerability GO-2026-6859 found by govulncheck.
+- The development image uses `golang:1.26.11-trixie`. The setup reference in the agent skill states the new minimum Go version.
+- No exported API changes.
+
 ## v0.1.5, 2026-11-05
 
 - Development image package installation uses HTTPS and bounded retries for signed snapshot indexes and package downloads.
